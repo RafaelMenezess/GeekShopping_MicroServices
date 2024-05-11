@@ -8,7 +8,7 @@ namespace GeekShopping.Web.Utils
         private static MediaTypeHeaderValue contentType = new MediaTypeHeaderValue("application/json");
         public static async Task<T> ReadContentAs<T>(this HttpResponseMessage response)
         {
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
                 throw new ApplicationException($"Something went wrong calling API: {response.ReasonPhrase}");
             string dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonSerializer.Deserialize<T>(dataAsString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
