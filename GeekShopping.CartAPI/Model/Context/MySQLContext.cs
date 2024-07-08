@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace GeekShopping.CartAPI.Model.Context
-{
-    public class MySQLContext : DbContext
-    {
-        public MySQLContext() { }
-        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
+namespace GeekShopping.CartAPI.Model.Context;
 
-        public DbSet<Product> Products { get; set; }
-    }
+public class MySQLContext : DbContext
+{
+    public MySQLContext() { }
+    public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
+
+    public DbSet<Product> Products { get; set; }
 }
