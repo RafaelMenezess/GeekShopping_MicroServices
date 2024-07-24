@@ -8,6 +8,6 @@ public class CartHeader : BaseEntity
 {
     [Column("user_id")]
     public string UserId { get; set; }
-    [Column("coupun_code")]
+    [Column("coupon_code")]
     public string CouponCode { get; set; }
 }
