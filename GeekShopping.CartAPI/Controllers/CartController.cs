@@ -92,6 +92,7 @@ public class CartController : ControllerBase
             return NotFound();
         }
         vo.CartDetails = cart.CartDetails;
+        vo.DateTime = DateTime.Now;
 
         //Task RabbitMQ
 
