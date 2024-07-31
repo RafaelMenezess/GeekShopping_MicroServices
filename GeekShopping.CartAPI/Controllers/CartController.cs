@@ -81,11 +81,15 @@ public class CartController : ControllerBase
             return NotFound();
         }
         return Ok(status);
-    }    
-    
+    }
+
     [HttpPost("checkout")]
     public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
     {
+        if (vo?.UserId == null)
+        {
+            return BadRequest();
+        }
         var cart = await _repository.FindCartByUserId(vo.UserId);
         if (cart == null)
         {
