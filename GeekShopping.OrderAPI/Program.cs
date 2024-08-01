@@ -1,3 +1,6 @@
+using GeekShopping.OrderAPI.Model.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 
 builder.Services.AddDbContext<MySQLContext>(options => options.
@@ -15,10 +17,6 @@ builder.Services.AddDbContext<MySQLContext>(options => options.
                                    new MySqlServerVersion(
                                    new Version(8, 0, 2))));
 
-
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-
-builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
 
@@ -76,6 +74,8 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
