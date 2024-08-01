@@ -1,5 +1,9 @@
-﻿using GeekShopping.OrderAPI.Repository;
+﻿using GeekShopping.OrderAPI.Messages;
+using GeekShopping.OrderAPI.Repository;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.MessageConsumer;
 
@@ -24,6 +28,21 @@ public class RabbitMQMessageConsumer : BackgroundService
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        stoppingToken.ThrowIfCancellationRequested();
+        var consumer = new EventingBasicConsumer(_channel);
+        consumer.Received += (channel, evt) =>
+        {
+            var content = Encoding.UTF8.GetString(evt.Body.ToArray());
+            CheckoutHeaderVO vo = JsonSerializer.Deserialize<CheckoutHeaderVO>(content);
+            ProcessOrder(vo).GetAwaiter().GetResult();
+            _channel.BasicAck(evt.DeliveryTag, false);
+        };
+        _channel.BasicConsume("checkoutqueue", false, consumer);
+        return Task.CompletedTask;
+    }
+
+    private async Task ProcessOrder(CheckoutHeaderVO vo)
     {
         throw new NotImplementedException();
     }
