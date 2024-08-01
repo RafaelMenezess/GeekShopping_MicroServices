@@ -42,8 +42,6 @@ O projeto está estruturado em vários microsserviços independentes que se comu
 
 2. **Configurar RabbitMQ com Docker**
 
-   **AINDA NÃO IMPLEMENTADO
-
    Use o Docker para configurar o RabbitMQ:
 
    ```bash
