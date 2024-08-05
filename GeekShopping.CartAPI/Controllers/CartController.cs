@@ -104,7 +104,7 @@ public class CartController : ControllerBase
 
         if (!string.IsNullOrEmpty(vo.CouponCode))
         {
-            CouponVO coupon = await _couponRepository.GetCouponByCouponCode(vo.CouponCode, token);
+            CouponVO coupon = await _couponRepository.GetCoupon(vo.CouponCode, token);
             if (vo.DiscountAmount != coupon.DiscountAmount)
             {
                 return StatusCode(412);
