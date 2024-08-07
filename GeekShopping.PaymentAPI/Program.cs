@@ -6,7 +6,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IProcessPayment, IProcessPayment>();
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 
@@ -65,8 +65,6 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-
-
 
 var app = builder.Build();
 
