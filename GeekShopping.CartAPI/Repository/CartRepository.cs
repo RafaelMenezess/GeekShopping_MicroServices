@@ -39,7 +39,7 @@ public class CartRepository : ICartRepository
         Cart cart = new()
         {
             CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(
-                c => c.UserId == userId)
+                c => c.UserId == userId) ?? new CartHeader()
         };
 
         cart.CartDetails = _context.CartDetails
