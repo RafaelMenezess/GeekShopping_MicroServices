@@ -11,7 +11,7 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
     private readonly string _password;
     private readonly string _userName;
     private IConnection _connection;
-    private const string ExchangeName = "FanoutPatmentUpdateExchange";
+    private const string ExchangeName = "FanoutPaymentUpdateExchange";
 
     public RabbitMQMessageSender()
     {
