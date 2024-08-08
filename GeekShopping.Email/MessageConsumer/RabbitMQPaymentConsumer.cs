@@ -12,7 +12,7 @@ public class RabbitMQPaymentConsumer : BackgroundService
     private readonly EmailRepository _repository;
     private IConnection _connection;
     private IModel _channel;
-    private const string ExchangeName = "FanoutPaymentUpdateExchange";
+    private const string ExchangeName = "DirectPaymentUpdateExchange";
     string queueName = "";
 
     public RabbitMQPaymentConsumer(EmailRepository repository)
